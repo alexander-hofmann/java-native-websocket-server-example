@@ -40,7 +40,9 @@ function WSGraph(){
                         if (oldvalues === null) {
                             newValues = [[new Date(json.date), json.value]]
                         } else {
-                            newValues = [...oldvalues,
+                            const vfrom = oldvalues.length >= 360 ? oldvalues.length - 360 : 0;
+                            const vto = oldvalues.length;
+                            newValues = [...oldvalues.slice(vfrom, vto),
                                 [parseISOString(json.date), json.value]
                             ];
                         }
@@ -48,9 +50,7 @@ function WSGraph(){
                             g = new Dygraph(document.getElementById(name), newValues,
                                 {
                                     resizable: "both",
-                                    rollPeriod: 365,
                                     drawPoints: true,
-                                    showRoller: true,
                                     valueRange: [-1.2, 1.2],
                                     labels: ['Time', 'Sinus']
                                 });

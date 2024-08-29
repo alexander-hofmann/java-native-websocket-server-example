@@ -25,7 +25,7 @@ public class MeasurementDataProvider implements DataProvider {
                 while (!stopped) {
                     Date nowDate = new Date();
                     if (nowDate.after(oldDate)) {
-                        MeasurementValue mv = new MeasurementValue(Math.sin(Math.toRadians((nowDate.getTime() / 1000) % 360)));
+                        MeasurementValue mv = new MeasurementValue(Math.sin(Math.toRadians((nowDate.getTime() / 100.0) % 360)));
                         String json = gson.toJson(mv);
                         try {
                             webSocket.send(json);
@@ -34,7 +34,7 @@ public class MeasurementDataProvider implements DataProvider {
                         }
                     }
                     try {
-                        Thread.sleep(1000);
+                        Thread.sleep(100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }

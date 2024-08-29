@@ -26,7 +26,7 @@ public class GsonUTCDateAdapter implements JsonSerializer<Date>, JsonDeserialize
     }
 
     private DateFormat getNewDateFormat() {
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", Locale.getDefault());
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault());
         dateFormat.setTimeZone(TimeZone.getTimeZone("UTC"));
         return dateFormat;
     }
