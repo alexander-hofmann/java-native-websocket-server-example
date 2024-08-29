@@ -1,11 +1,11 @@
 
 import './App.css';
 import WebSocketClient from "./WebSocketClient";
-
+import WSGraph from "./WSGraph";
 
 function App() {
   return (
-    <WebSocketClient />
+    <WSGraph />
   );
 }
 

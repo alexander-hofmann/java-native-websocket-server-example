@@ -18,7 +18,7 @@ function WebSocketClient(){
                 console.log('websocket connection established...');
                 socket.send("world")
                 setTimeout(()=> {
-                    socket.send('datetime');
+                    socket.send('sinus');
                 }, 10000);
             };
             socket.onmessage = (event) => {

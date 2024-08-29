@@ -6,6 +6,7 @@ package me.jittagornp.example;
 import me.jittagornp.example.websocket.*;
 import technikum.wien.at.DataProvider;
 import technikum.wien.at.DateTimeProvider;
+import technikum.wien.at.MeasurementDataProvider;
 
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +19,7 @@ public class AppStarter {
 
     public static void main(final String[] args) throws IOException, NoSuchAlgorithmException {
 
-        final WebSocketHandler handler = new TextWebSocketHandler() {
+        final WebSocketHandler<String> handler = new TextWebSocketHandler() {
             private HashMap<WebSocket, DataProvider> clients = new HashMap<WebSocket, DataProvider>();
             @Override
             public void onConnect(final WebSocket webSocket) {
@@ -30,6 +31,11 @@ public class AppStarter {
                 System.out.println("Client message => " + message);
                 if (message.contains("datetime")) {
                     DataProvider dp = new DateTimeProvider();
+                    dp.start(webSocket);
+                    clients.put(webSocket, dp);
+                }
+                if (message.contains("sinus")) {
+                    DataProvider dp = new MeasurementDataProvider();
                     dp.start(webSocket);
                     clients.put(webSocket, dp);
                 }
