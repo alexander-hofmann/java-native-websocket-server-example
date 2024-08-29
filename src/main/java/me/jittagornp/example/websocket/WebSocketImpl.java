@@ -72,6 +72,9 @@ class WebSocketImpl implements WebSocket {
 
     @Override
     public void send(final FrameData message) {
+        if (messageQueue.size() >= 20) {
+            throw new IllegalStateException("Too many messages");
+        }
         messageQueue.add(message);
     }
 
